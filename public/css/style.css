@@ -237,11 +237,11 @@ main {
     gap: 20px;
 }
 
-.ingredients-wrapper .ingredients-1 p:nth-child(2),
-.ingredients-wrapper .ingredients-2 p:nth-child(2),
-.ingredients-wrapper .ingredients-3 p:nth-child(2),
-.ingredients-wrapper .ingredients-4 p:nth-child(2),
-.ingredients-wrapper .ingredients-5 p:nth-child(2) {
+.ingredients-wrapper .ingredient-item p:nth-child(2),
+.ingredients-wrapper .ingredient-item p:nth-child(2),
+.ingredients-wrapper .ingredient-item p:nth-child(2),
+.ingredients-wrapper .ingredient-item p:nth-child(2),
+.ingredients-wrapper .ingredient-item p:nth-child(2) {
     font-weight: lighter;
     color: #7A7A7A;
 }
