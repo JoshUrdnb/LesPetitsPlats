@@ -70,3 +70,26 @@ function displayRecipes(recipes) {
 }
 
 displayRecipes(recipes)
+
+// Fonction de recherche
+const searchField = document.getElementById('search-input')
+searchField.addEventListener('change', function(e) {
+    const searchText = e.target.value.trim()
+    console.log(searchText)
+
+    filterRecipes(searchText)
+})
+
+function filterRecipes(searchText) {
+
+    const recipeCards = document.querySelectorAll('.card')
+
+    recipeCards.forEach(card => {
+        const recipeTitle = card.querySelector('h2').textContent.toLowerCase()
+        if (recipeTitle.includes(searchText.toLowerCase())) {
+            card.style.display = 'block'
+        } else {
+            card.style.display = 'none'
+        }
+    })
+}
