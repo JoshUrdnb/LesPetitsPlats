@@ -80,16 +80,19 @@ searchField.addEventListener('change', function(e) {
     filterRecipes(searchText)
 })
 
+const filteredRecipes = []
+
 function filterRecipes(searchText) {
+    const gridWrapper = document.querySelector('.grid-wrapper')
+    gridWrapper.innerHTML = ''
 
-    const recipeCards = document.querySelectorAll('.card')
-
-    recipeCards.forEach(card => {
-        const recipeTitle = card.querySelector('h2').textContent.toLowerCase()
+    recipes.forEach(recipe => {
+        const recipeTitle = recipe.name.toLowerCase()
         if (recipeTitle.includes(searchText.toLowerCase())) {
-            card.style.display = 'block'
-        } else {
-            card.style.display = 'none'
+            filteredRecipes.push(recipe)
+            const recipeCard = createRecipeCard(recipe)
+            gridWrapper.appendChild(recipeCard)
         }
+        console.log(filteredRecipes)
     })
 }
