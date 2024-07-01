@@ -85,6 +85,7 @@ const filteredRecipes = []
 function filterRecipes(searchText) {
     const gridWrapper = document.querySelector('.grid-wrapper')
     gridWrapper.innerHTML = ''
+    filteredRecipes.length = 0
 
     recipes.forEach(recipe => {
         const recipeTitle = recipe.name.toLowerCase()
@@ -96,3 +97,51 @@ function filterRecipes(searchText) {
         console.log(filteredRecipes)
     })
 }
+
+function filterRecipesByIngredient(ingredient) {
+    const gridWrapper = document.querySelector('.grid-wrapper')
+    gridWrapper.innerHTML = ''
+    filteredRecipes.length = 0
+
+    recipes.forEach(recipe => {
+        const hasIngredient = recipe.ingredients.some(ing => ing.ingredient.toLowerCase() === ingredient.toLowerCase())
+        if (hasIngredient) {
+            filteredRecipes.push(recipe)
+            const recipeCard = createRecipeCard(recipe)
+            gridWrapper.appendChild(recipeCard)
+        }
+    })
+
+    // console.log(filteredRecipes)
+}
+
+document.querySelector('.drop-btn').addEventListener('click', function() {
+    const dropdownContent = document.querySelector('.dropdown-content')
+    dropdownContent.classList.toggle('show')
+})
+
+function populateDropdown(recipes) {
+    const dropdownContent = document.querySelector('.dropdown-content')
+    dropdownContent.innerHTML = ''
+
+    const ingredientsSet = new Set()
+
+    recipes.forEach(recipe => {
+        recipe.ingredients.forEach(ingredient => {
+            ingredientsSet.add(ingredient.ingredient)
+        })
+    })
+
+    ingredientsSet.forEach(ingredient => {
+        const ingredientLink = document.createElement('a')
+        ingredientLink.href = '#'
+        ingredientLink.textContent = ingredient
+        ingredientLink.addEventListener('click', function(e) {
+            e.preventDefault()
+            filterRecipesByIngredient(ingredient)
+        })
+        dropdownContent.appendChild(ingredientLink)
+    })
+}
+
+populateDropdown(recipes)
