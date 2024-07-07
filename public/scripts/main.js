@@ -73,7 +73,7 @@ displayRecipes(recipes)
 
 // Fonction de recherche
 const searchField = document.getElementById('search-input')
-searchField.addEventListener('change', function(e) {
+searchField.addEventListener('change', function (e) {
     const searchText = e.target.value.trim()
     console.log(searchText)
 
@@ -85,7 +85,6 @@ const filteredRecipes = []
 function filterRecipes(searchText) {
     const gridWrapper = document.querySelector('.grid-wrapper')
     gridWrapper.innerHTML = ''
-    filteredRecipes.length = 0
 
     recipes.forEach(recipe => {
         const recipeTitle = recipe.name.toLowerCase()
@@ -101,7 +100,6 @@ function filterRecipes(searchText) {
 function filterRecipesByIngredient(ingredient) {
     const gridWrapper = document.querySelector('.grid-wrapper')
     gridWrapper.innerHTML = ''
-    filteredRecipes.length = 0
 
     recipes.forEach(recipe => {
         const hasIngredient = recipe.ingredients.some(ing => ing.ingredient.toLowerCase() === ingredient.toLowerCase())
@@ -111,17 +109,15 @@ function filterRecipesByIngredient(ingredient) {
             gridWrapper.appendChild(recipeCard)
         }
     })
-
-    // console.log(filteredRecipes)
 }
 
-document.querySelector('.drop-btn').addEventListener('click', function() {
+document.querySelector('.drop-btn').addEventListener('click', function () {
     const dropdownContent = document.querySelector('.dropdown-content')
     dropdownContent.classList.toggle('show')
 })
 
 function populateDropdown(recipes) {
-    const dropdownContent = document.querySelector('.dropdown-content')
+    const dropdownContent = document.querySelector('.dropdown-content2')
     dropdownContent.innerHTML = ''
 
     const ingredientsSet = new Set()
@@ -136,7 +132,7 @@ function populateDropdown(recipes) {
         const ingredientLink = document.createElement('a')
         ingredientLink.href = '#'
         ingredientLink.textContent = ingredient
-        ingredientLink.addEventListener('click', function(e) {
+        ingredientLink.addEventListener('click', function (e) {
             e.preventDefault()
             filterRecipesByIngredient(ingredient)
         })
