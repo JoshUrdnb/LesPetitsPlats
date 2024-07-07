@@ -97,13 +97,17 @@ function filterRecipes(searchText) {
     })
 }
 
-function filterRecipesByIngredient(ingredient) {
+const selectedIngredients = new Set()
+
+function filterRecipesByIngredients() {
     const gridWrapper = document.querySelector('.grid-wrapper')
     gridWrapper.innerHTML = ''
 
     recipes.forEach(recipe => {
-        const hasIngredient = recipe.ingredients.some(ing => ing.ingredient.toLowerCase() === ingredient.toLowerCase())
-        if (hasIngredient) {
+        const hasIngredients = [...selectedIngredients].every(selectedIngredient =>
+            recipe.ingredients.some(ing => ing.ingredient.toLowerCase() === selectedIngredient.toLowerCase())
+        )
+        if (hasIngredients) {
             filteredRecipes.push(recipe)
             const recipeCard = createRecipeCard(recipe)
             gridWrapper.appendChild(recipeCard)
@@ -134,7 +138,14 @@ function populateDropdown(recipes) {
         ingredientLink.textContent = ingredient
         ingredientLink.addEventListener('click', function (e) {
             e.preventDefault()
-            filterRecipesByIngredient(ingredient)
+            if (selectedIngredients.has(ingredient)) {
+                selectedIngredients.delete(ingredient)
+                ingredientLink.classList.remove('selected')
+            } else {
+                selectedIngredients.add(ingredient)
+                ingredientLink.classList.add('selected')
+            }
+            filterRecipesByIngredients()
         })
         dropdownContent.appendChild(ingredientLink)
     })

@@ -159,6 +159,11 @@ main {
     background-color: #ffd15a;
 }
 
+.dropdown-content a.selected {
+    background-color: #ffd15a;
+    /* color: #000; */
+}
+
 .dropdown-content::-webkit-scrollbar {
     width: 0;
     background: transparent;
