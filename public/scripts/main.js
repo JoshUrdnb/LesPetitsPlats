@@ -1,6 +1,5 @@
 import { recipes } from "./data/recipes.js"
 
-// Fonction pour afficher les cartes
 function createRecipeCard(recipe) {
     const card = document.createElement('div')
     card.className = 'card'
@@ -71,7 +70,6 @@ function displayRecipes(recipes) {
 
 displayRecipes(recipes)
 
-// Fonction de recherche
 const searchField = document.getElementById('search-input')
 searchField.addEventListener('change', function (e) {
     const searchText = e.target.value.trim()
@@ -120,6 +118,35 @@ document.querySelector('.drop-btn').addEventListener('click', function () {
     dropdownContent.classList.toggle('show')
 })
 
+function updateSelectedIngredientTags() {
+    const selectedIngredientsWrapper = document.querySelector('.selected-ingredients')
+    selectedIngredientsWrapper.innerHTML = ''
+
+    selectedIngredients.forEach(ingredient => {
+        const tag = document.createElement('div')
+        tag.textContent = ingredient
+        tag.className = 'ingredient-tag'
+        
+        const removeButton = document.createElement('a')
+        removeButton.className = 'remove-tag'
+
+        const icon = document.createElement('i')
+        icon.className = 'fa-solid fa-xmark'
+        icon.setAttribute('aria-hidden', 'true')
+        removeButton.appendChild(icon)
+
+        removeButton.addEventListener('click', function() {
+            selectedIngredients.delete(ingredient)
+            populateDropdown(recipes)
+            filterRecipesByIngredients()
+            updateSelectedIngredientTags()
+        })
+
+        tag.appendChild(removeButton)
+        selectedIngredientsWrapper.appendChild(tag)
+    })
+}
+
 function populateDropdown(recipes) {
     const dropdownContent = document.querySelector('.dropdown-content2')
     dropdownContent.innerHTML = ''
@@ -146,9 +173,11 @@ function populateDropdown(recipes) {
                 ingredientLink.classList.add('selected')
             }
             filterRecipesByIngredients()
+            updateSelectedIngredientTags()
         })
         dropdownContent.appendChild(ingredientLink)
     })
 }
 
 populateDropdown(recipes)
+updateSelectedIngredientTags()

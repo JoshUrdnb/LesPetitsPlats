@@ -134,7 +134,7 @@ main {
     border: none;
     cursor: pointer;
     border-radius: .5rem;
-    min-width: 200px;
+    width: 200px;
 }
 
 .dropdown-content {
@@ -171,6 +171,32 @@ main {
 
 .show {
     display: block;
+}
+
+/* TAGS */
+
+.selected-ingredients {
+    display: flex;
+    height: 5rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.ingredient-tag {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-right: 1rem;
+    background-color: #ffd15a;
+    height: 3rem;
+    width: 200px;
+    border-radius: .5rem;
+}
+
+.ingredient-tag a{
+    cursor: pointer;
 }
 
 /* RECIPES */
