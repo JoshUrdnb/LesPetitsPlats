@@ -84,16 +84,28 @@ function filterRecipes(searchText) {
     const gridWrapper = document.querySelector('.grid-wrapper')
     gridWrapper.innerHTML = ''
 
+    const lowerCaseSearchText = searchText.toLowerCase()
+
     recipes.forEach(recipe => {
-        const recipeTitle = recipe.name.toLowerCase()
-        if (recipeTitle.includes(searchText.toLowerCase())) {
+        const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient.toLowerCase()).join(' ')
+        const recipeAppliance = recipe.appliance.toLowerCase()
+        const recipeUstensils = recipe.ustensils.map(ust => ust.toLowerCase()).join(' ')
+
+        // Combiner tous les éléments en une seule chaîne de texte
+        const combinedText = `${recipeIngredients} ${recipeAppliance} ${recipeUstensils}`
+
+        // Vérifier si le texte de recherche est présent dans la chaîne combinée
+        if (combinedText.includes(lowerCaseSearchText)) {
             filteredRecipes.push(recipe)
             const recipeCard = createRecipeCard(recipe)
             gridWrapper.appendChild(recipeCard)
         }
-        console.log(filteredRecipes)
     })
+    
+    console.log(filteredRecipes)
 }
+
+
 
 const selectedIngredients = new Set()
 
