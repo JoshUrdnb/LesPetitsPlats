@@ -189,6 +189,20 @@ function populateDropdown(recipes) {
         })
         dropdownContent.appendChild(ingredientLink)
     })
+
+    const ingredientSearchInput = document.getElementById('ingredient-search')
+        ingredientSearchInput.addEventListener('input', function (e) {
+        const searchValue = e.target.value.trim().toLowerCase()
+    
+        dropdownContent.querySelectorAll('a').forEach(link => {
+            const ingredientName = link.textContent.toLowerCase()
+            if (ingredientName.includes(searchValue)) {
+                link.style.display = 'block'
+            } else {
+                link.style.display = 'none'
+            }
+        })
+    })
 }
 
 populateDropdown(recipes)
