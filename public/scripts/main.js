@@ -78,7 +78,7 @@ searchField.addEventListener('change', function (e) {
     filterRecipes(searchText)
 })
 
-const filteredRecipes = []
+let filteredRecipes = recipes
 
 function filterRecipes(searchText) {
     const gridWrapper = document.querySelector('.grid-wrapper')
@@ -86,7 +86,9 @@ function filterRecipes(searchText) {
 
     const lowerCaseSearchText = searchText.toLowerCase()
 
-    recipes.forEach(recipe => {
+    const filteredNewRecipes = []
+
+    filteredRecipes.forEach(recipe => {
         const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient.toLowerCase()).join(' ')
         const recipeAppliance = recipe.appliance.toLowerCase()
         const recipeUstensils = recipe.ustensils.map(ust => ust.toLowerCase()).join(' ')
@@ -96,11 +98,13 @@ function filterRecipes(searchText) {
 
         // Vérifier si le texte de recherche est présent dans la chaîne combinée
         if (combinedText.includes(lowerCaseSearchText)) {
-            filteredRecipes.push(recipe)
+            filteredNewRecipes.push(recipe)
             const recipeCard = createRecipeCard(recipe)
             gridWrapper.appendChild(recipeCard)
         }
     })
+
+    filteredRecipes = filteredNewRecipes
     
     console.log(filteredRecipes)
 }
@@ -113,16 +117,20 @@ function filterRecipesByIngredients() {
     const gridWrapper = document.querySelector('.grid-wrapper')
     gridWrapper.innerHTML = ''
 
-    recipes.forEach(recipe => {
+    const filteredNewRecipes = []
+
+    filteredRecipes.forEach(recipe => {
         const hasIngredients = [...selectedIngredients].every(selectedIngredient =>
             recipe.ingredients.some(ing => ing.ingredient.toLowerCase() === selectedIngredient.toLowerCase())
         )
         if (hasIngredients) {
-            filteredRecipes.push(recipe)
+            filteredNewRecipes.push(recipe)
             const recipeCard = createRecipeCard(recipe)
             gridWrapper.appendChild(recipeCard)
         }
     })
+
+    filteredRecipes = filteredNewRecipes
 }
 
 document.querySelector('.drop-btn').addEventListener('click', function () {
@@ -150,6 +158,8 @@ function updateSelectedIngredientTags() {
         removeButton.addEventListener('click', function() {
             selectedIngredients.delete(ingredient)
             populateDropdown(recipes)
+            filteredRecipes = recipes
+            filterRecipes()
             filterRecipesByIngredients()
             updateSelectedIngredientTags()
         })
