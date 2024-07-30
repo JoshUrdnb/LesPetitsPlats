@@ -80,36 +80,58 @@ searchField.addEventListener('change', function (e) {
 
 let filteredRecipes = recipes
 
-function filterRecipes(searchText) {
-    const gridWrapper = document.querySelector('.grid-wrapper')
-    gridWrapper.innerHTML = ''
+function filterRecipes(searchText = '') {
+    const gridWrapper = document.querySelector('.grid-wrapper')  // Sélectionne l'élément avec la classe 'grid-wrapper'
+    gridWrapper.innerHTML = ''  // Vide le contenu de l'élément
+    const lowerCaseSearchText = searchText.toLowerCase()  // Convertit le texte de recherche en minuscules
+    const filteredNewRecipes = []  // Initialise un tableau pour stocker les recettes filtrées
 
-    const lowerCaseSearchText = searchText.toLowerCase()
+    for (let i = 0; i < filteredRecipes.length; i++) {  // Parcourt toutes les recettes filtrées
+        const recipe = filteredRecipes[i]  // Récupère chaque recette
 
-    const filteredNewRecipes = []
+        // Vérifie si la recette a un nom, et convertit ce nom en minuscules
+        let recipeName = ''
+        if (recipe.name) {
+            recipeName = recipe.name.toLowerCase()
+        }
 
-    filteredRecipes.forEach(recipe => {
-        const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient.toLowerCase()).join(' ')
-        const recipeAppliance = recipe.appliance.toLowerCase()
-        const recipeUstensils = recipe.ustensils.map(ust => ust.toLowerCase()).join(' ')
+        // Concatène tous les ingrédients de la recette en une seule chaîne de caractères en minuscules
+        let recipeIngredients = ''
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+            const ing = recipe.ingredients[j]
+            if (ing.ingredient) {
+                recipeIngredients += ing.ingredient.toLowerCase()
+            }
+        }
 
-        // Combiner tous les éléments en une seule chaîne de texte
-        const combinedText = `${recipeIngredients} ${recipeAppliance} ${recipeUstensils}`
+        // Vérifie si la recette a une description, et convertit cette description en minuscules
+        let recipeDescription = ''
+        if (recipe.description) {
+            recipeDescription = recipe.description.toLowerCase()
+        }
 
-        // Vérifier si le texte de recherche est présent dans la chaîne combinée
-        if (combinedText.includes(lowerCaseSearchText)) {
+        // Vérifie si le texte de recherche est inclus dans le nom, les ingrédients ou la description de la recette
+        let isMatch = false
+        if (recipeName.includes(lowerCaseSearchText)) {
+            isMatch = true
+        } else if (recipeIngredients.includes(lowerCaseSearchText)) {
+            isMatch = true
+        } else if (recipeDescription.includes(lowerCaseSearchText)) {
+            isMatch = true
+        }
+
+        // Si une correspondance est trouvée, ajoute la recette aux résultats filtrés et affiche-la dans la grille
+        if (isMatch) {
             filteredNewRecipes.push(recipe)
             const recipeCard = createRecipeCard(recipe)
             gridWrapper.appendChild(recipeCard)
         }
-    })
+    }
 
-    filteredRecipes = filteredNewRecipes
-    
-    console.log(filteredRecipes)
+    filteredRecipes = filteredNewRecipes  // Met à jour la liste des recettes filtrées
+    console.log(filteredRecipes)  // Affiche les recettes filtrées dans la console
+    // updateDropdownWithAssociatedIngredients(filteredRecipes)  // Met à jour le dropdown avec les ingrédients associés
 }
-
-
 
 const selectedIngredients = new Set()
 
@@ -146,7 +168,7 @@ function updateSelectedIngredientTags() {
         const tag = document.createElement('div')
         tag.textContent = ingredient
         tag.className = 'ingredient-tag'
-        
+
         const removeButton = document.createElement('a')
         removeButton.className = 'remove-tag'
 
@@ -155,7 +177,7 @@ function updateSelectedIngredientTags() {
         icon.setAttribute('aria-hidden', 'true')
         removeButton.appendChild(icon)
 
-        removeButton.addEventListener('click', function() {
+        removeButton.addEventListener('click', function () {
             selectedIngredients.delete(ingredient)
             populateDropdown(recipes)
             filteredRecipes = recipes
@@ -201,9 +223,9 @@ function populateDropdown(recipes) {
     })
 
     const ingredientSearchInput = document.getElementById('ingredient-search')
-        ingredientSearchInput.addEventListener('input', function (e) {
+    ingredientSearchInput.addEventListener('input', function (e) {
         const searchValue = e.target.value.trim().toLowerCase()
-    
+
         dropdownContent.querySelectorAll('a').forEach(link => {
             const ingredientName = link.textContent.toLowerCase()
             if (ingredientName.includes(searchValue)) {
