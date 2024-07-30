@@ -71,7 +71,7 @@ function displayRecipes(recipes) {
 displayRecipes(recipes)
 
 const searchField = document.getElementById('search-input')
-searchField.addEventListener('change', function (e) {
+searchField.addEventListener('input', function (e) {
     const searchText = e.target.value.trim()
     console.log(searchText)
 
@@ -80,7 +80,7 @@ searchField.addEventListener('change', function (e) {
 
 let filteredRecipes = recipes
 
-function filterRecipes(searchText) {
+function filterRecipes(searchText = '') {
     const gridWrapper = document.querySelector('.grid-wrapper')
     gridWrapper.innerHTML = ''
 
@@ -89,13 +89,13 @@ function filterRecipes(searchText) {
     const filteredNewRecipes = []
 
     filteredRecipes.forEach(recipe => {
-        const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient.toLowerCase()).join(' ')
-        const recipeAppliance = recipe.appliance.toLowerCase()
-        const recipeUstensils = recipe.ustensils.map(ust => ust.toLowerCase()).join(' ')
+        const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient ? ing.ingredient.toLowerCase() : '').join(' ')
+        const recipeAppliance = recipe.appliance ? recipe.appliance.toLowerCase() : ''
+        const recipeUstensils = recipe.ustensils.map(ust => ust ? ust.toLowerCase() : '').join(' ')
 
         // Combiner tous les éléments en une seule chaîne de texte
         const combinedText = `${recipeIngredients} ${recipeAppliance} ${recipeUstensils}`
-
+        
         // Vérifier si le texte de recherche est présent dans la chaîne combinée
         if (combinedText.includes(lowerCaseSearchText)) {
             filteredNewRecipes.push(recipe)
@@ -105,11 +105,11 @@ function filterRecipes(searchText) {
     })
 
     filteredRecipes = filteredNewRecipes
-    
+
     console.log(filteredRecipes)
+
+    // updateDropdownWithAssociatedIngredients(filteredRecipes)
 }
-
-
 
 const selectedIngredients = new Set()
 
@@ -146,7 +146,7 @@ function updateSelectedIngredientTags() {
         const tag = document.createElement('div')
         tag.textContent = ingredient
         tag.className = 'ingredient-tag'
-        
+
         const removeButton = document.createElement('a')
         removeButton.className = 'remove-tag'
 
@@ -155,7 +155,7 @@ function updateSelectedIngredientTags() {
         icon.setAttribute('aria-hidden', 'true')
         removeButton.appendChild(icon)
 
-        removeButton.addEventListener('click', function() {
+        removeButton.addEventListener('click', function () {
             selectedIngredients.delete(ingredient)
             populateDropdown(recipes)
             filteredRecipes = recipes
@@ -201,9 +201,9 @@ function populateDropdown(recipes) {
     })
 
     const ingredientSearchInput = document.getElementById('ingredient-search')
-        ingredientSearchInput.addEventListener('input', function (e) {
+    ingredientSearchInput.addEventListener('input', function (e) {
         const searchValue = e.target.value.trim().toLowerCase()
-    
+
         dropdownContent.querySelectorAll('a').forEach(link => {
             const ingredientName = link.textContent.toLowerCase()
             if (ingredientName.includes(searchValue)) {
