@@ -71,7 +71,7 @@ function displayRecipes(recipes) {
 displayRecipes(recipes)
 
 const searchField = document.getElementById('search-input')
-searchField.addEventListener('change', function (e) {
+searchField.addEventListener('input', function (e) {
     const searchText = e.target.value.trim()
     console.log(searchText)
 
@@ -82,6 +82,8 @@ let filteredRecipes = recipes
 
 function filterRecipes(searchText = '') {
     if (searchText.length < 3) {
+        filteredRecipes = recipes
+        displayRecipes(filteredRecipes)
         return  // Si le texte de recherche contient moins de 3 caractères, ne rien faire
     }
 
@@ -90,38 +92,37 @@ function filterRecipes(searchText = '') {
     const lowerCaseSearchText = searchText.toLowerCase()  // Convertit le texte de recherche en minuscules
     const filteredNewRecipes = []  // Initialise un tableau pour stocker les recettes filtrées
 
-    for (let i = 0; i < filteredRecipes.length; i++) {  // Parcourt toutes les recettes filtrées
-        const recipe = filteredRecipes[i]  // Récupère chaque recette
+    for (let i = 0; i < recipes.length; i++) {  // Parcourt toutes les recettes filtrées
+        const recipe = recipes[i]  // Récupère chaque recette
+
+
+        let isMatch = false
 
         // Vérifie si la recette a un nom, et convertit ce nom en minuscules
-        let recipeName = ''
+        let recipeName = '' // Valeur est vide
         if (recipe.name) {
-            recipeName = recipe.name.toLowerCase()
+            recipeName = recipe.name.toLowerCase() // correspond au nom de la recette en cours comverti en min.
         }
-
-        // Concatène tous les ingrédients de la recette en une seule chaîne de caractères en minuscules
-        let recipeIngredients = ''
-        for (let j = 0; j < recipe.ingredients.length; j++) {
-            const ing = recipe.ingredients[j]
-            if (ing.ingredient) {
-                recipeIngredients += ing.ingredient.toLowerCase()
-            }
-        }
-
-        // Vérifie si la recette a une description, et convertit cette description en minuscules
-        let recipeDescription = ''
-        if (recipe.description) {
-            recipeDescription = recipe.description.toLowerCase()
-        }
-
-        // Vérifie si le texte de recherche est inclus dans le nom, les ingrédients ou la description de la recette
-        let isMatch = false
         if (recipeName.includes(lowerCaseSearchText)) {
             isMatch = true
-        } else if (recipeIngredients.includes(lowerCaseSearchText)) {
+        } else if (recipe.description.toLowerCase().includes(lowerCaseSearchText)) {
             isMatch = true
-        } else if (recipeDescription.includes(lowerCaseSearchText)) {
-            isMatch = true
+        } else {
+            // let recipeIngredients = ''
+            // console.log("verification dans les ingredients")
+            for (let j = 0; j < recipe.ingredients.length; j++) {
+                const ing = recipe.ingredients[j]
+                // console.log("ing", ing)
+                // console.log("ing.ingredient", ing.ingredient)
+                if (ing.ingredient.toLowerCase().includes(lowerCaseSearchText)) {
+                    // recipeIngredients += ing.ingredient.toLowerCase()
+                    isMatch = true
+                    break
+                }
+            }
+            // if (recipeIngredients.toLowerCase().includes(lowerCaseSearchText)) {
+            //     isMatch = true
+            // }
         }
 
         // Si une correspondance est trouvée, ajoute la recette aux résultats filtrés et affiche-la dans la grille
@@ -131,9 +132,6 @@ function filterRecipes(searchText = '') {
             gridWrapper.appendChild(recipeCard)
         }
     }
-
-    filteredRecipes = filteredNewRecipes  // Met à jour la liste des recettes filtrées
-    console.log(filteredRecipes)  // Affiche les recettes filtrées dans la console
 }
 
 const selectedIngredients = new Set()
