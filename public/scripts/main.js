@@ -81,6 +81,10 @@ searchField.addEventListener('change', function (e) {
 let filteredRecipes = recipes
 
 function filterRecipes(searchText = '') {
+    if (searchText.length < 3) {
+        return  // Si le texte de recherche contient moins de 3 caractères, ne rien faire
+    }
+
     const gridWrapper = document.querySelector('.grid-wrapper')  // Sélectionne l'élément avec la classe 'grid-wrapper'
     gridWrapper.innerHTML = ''  // Vide le contenu de l'élément
     const lowerCaseSearchText = searchText.toLowerCase()  // Convertit le texte de recherche en minuscules
@@ -130,7 +134,6 @@ function filterRecipes(searchText = '') {
 
     filteredRecipes = filteredNewRecipes  // Met à jour la liste des recettes filtrées
     console.log(filteredRecipes)  // Affiche les recettes filtrées dans la console
-    // updateDropdownWithAssociatedIngredients(filteredRecipes)  // Met à jour le dropdown avec les ingrédients associés
 }
 
 const selectedIngredients = new Set()
