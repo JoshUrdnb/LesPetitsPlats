@@ -105,10 +105,8 @@ function filterRecipes(searchText = '') {
     })
 
     filteredRecipes = filteredNewRecipes
-
-    console.log(filteredRecipes)
-
-    // updateDropdownWithAssociatedIngredients(filteredRecipes)
+    populateDropdown(filteredRecipes)
+    // console.log(filteredRecipes)
 }
 
 const selectedIngredients = new Set()
