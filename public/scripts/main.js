@@ -132,6 +132,9 @@ function filterRecipes(searchText = '') {
             gridWrapper.appendChild(recipeCard)
         }
     }
+
+    filteredRecipes = filteredNewRecipes  // Mise à jour de filteredRecipes avec les nouvelles recettes filtrées
+    populateDropdown(filteredRecipes)  // Mise à jour du menu déroulant avec les nouvelles recettes filtrées
 }
 
 const selectedIngredients = new Set()
