@@ -81,6 +81,13 @@ searchField.addEventListener('input', function (e) {
 let filteredRecipes = recipes
 
 function filterRecipes(searchText = '') {
+
+    if (searchText.length < 3) {
+        filteredRecipes = recipes
+        displayRecipes(filteredRecipes)
+        return
+    }
+
     const gridWrapper = document.querySelector('.grid-wrapper')
     gridWrapper.innerHTML = ''
 
@@ -88,14 +95,14 @@ function filterRecipes(searchText = '') {
 
     const filteredNewRecipes = []
 
-    filteredRecipes.forEach(recipe => {
-        const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient ? ing.ingredient.toLowerCase() : '').join(' ')
-        const recipeAppliance = recipe.appliance ? recipe.appliance.toLowerCase() : ''
-        const recipeUstensils = recipe.ustensils.map(ust => ust ? ust.toLowerCase() : '').join(' ')
+    recipes.forEach(recipe => {
+        const recipeName = recipe.name ? recipe.name.toLowerCase() : ''
+        const recipeDescription = recipe.description ? recipe.description.toLowerCase() : ''
+        const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient ? ing.ingredient.toLowerCase() : '').join('')
 
         // Combiner tous les éléments en une seule chaîne de texte
-        const combinedText = `${recipeIngredients} ${recipeAppliance} ${recipeUstensils}`
-        
+        const combinedText = `${recipeName} ${recipeDescription} ${recipeIngredients}`
+
         // Vérifier si le texte de recherche est présent dans la chaîne combinée
         if (combinedText.includes(lowerCaseSearchText)) {
             filteredNewRecipes.push(recipe)
