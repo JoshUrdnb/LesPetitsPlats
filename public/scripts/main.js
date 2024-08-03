@@ -68,7 +68,14 @@ function displayRecipes(recipes) {
     })
 }
 
+function updateSearchResultsCount(count) {
+    const allRecipesDiv = document.getElementById('all-recipes')
+    allRecipesDiv.innerHTML = `${count} recettes`
+}
+
 displayRecipes(recipes)
+
+updateSearchResultsCount(recipes.length)
 
 const searchField = document.getElementById('search-input')
 searchField.addEventListener('input', function (e) {
@@ -85,6 +92,7 @@ function filterRecipes(searchText = '') {
     if (searchText.length < 3) {
         filteredRecipes = recipes
         displayRecipes(filteredRecipes)
+        updateSearchResultsCount(filteredRecipes.length)
         return
     }
 
@@ -113,7 +121,7 @@ function filterRecipes(searchText = '') {
 
     filteredRecipes = filteredNewRecipes
     populateDropdown(filteredRecipes)
-    // console.log(filteredRecipes)
+    updateSearchResultsCount(filteredRecipes.length)
 }
 
 const selectedIngredients = new Set()
@@ -136,6 +144,7 @@ function filterRecipesByIngredients() {
     })
 
     filteredRecipes = filteredNewRecipes
+    updateSearchResultsCount(filteredRecipes.length)
 }
 
 document.querySelector('.drop-btn').addEventListener('click', function () {
