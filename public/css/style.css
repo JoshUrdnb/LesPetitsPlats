@@ -255,6 +255,13 @@ main {
     border-radius: 0 0 1.25rem 1.25rem;
 }
 
+.card-desciption {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 5rem;
+}
+
 .card-content h2 {
     font-family: "Anton", sans-serif;
     font-weight: 400;

@@ -28,6 +28,7 @@ function createRecipeCard(recipe) {
 
     const description = document.createElement('p')
     description.textContent = recipe.description
+    description.classList.add('card-description')
     cardContent.appendChild(description)
 
     const ingredientsHeader = document.createElement('h3')
