@@ -1,5 +1,9 @@
 import { recipes } from "./data/recipes.js"
 
+let filteredRecipes = recipes
+const searchField = document.getElementById('search-input')
+const selectedIngredients = new Set()
+
 function createRecipeCard(recipe) {
     const card = document.createElement('div')
     card.className = 'card'
@@ -28,7 +32,7 @@ function createRecipeCard(recipe) {
 
     const description = document.createElement('p')
     description.textContent = recipe.description
-    description.classList.add('card-description')
+    description.className = ('card-description')
     cardContent.appendChild(description)
 
     const ingredientsHeader = document.createElement('h3')
@@ -74,31 +78,19 @@ function updateSearchResultsCount(count) {
     allRecipesDiv.innerHTML = `${count} recettes`
 }
 
-displayRecipes(recipes)
-
-updateSearchResultsCount(recipes.length)
-
-const searchField = document.getElementById('search-input')
-searchField.addEventListener('input', function (e) {
-    const searchText = e.target.value.trim()
-    console.log(searchText)
-
-    filterRecipes(searchText)
+searchField.addEventListener('input', function () {
+    filterRecipesCombined()
 })
 
-let filteredRecipes = recipes
-
-function filterRecipes(searchText = '') {
+// Construit le tableau des recettes qui repondent au texte saisi.
+function filterRecipes() {
+    const searchText = searchField.value.trim()
+    console.log(searchText)
 
     if (searchText.length < 3) {
         filteredRecipes = recipes
-        displayRecipes(filteredRecipes)
-        updateSearchResultsCount(filteredRecipes.length)
         return
     }
-
-    const gridWrapper = document.querySelector('.grid-wrapper')
-    gridWrapper.innerHTML = ''
 
     const lowerCaseSearchText = searchText.toLowerCase()
 
@@ -115,21 +107,13 @@ function filterRecipes(searchText = '') {
         // Vérifier si le texte de recherche est présent dans la chaîne combinée
         if (combinedText.includes(lowerCaseSearchText)) {
             filteredNewRecipes.push(recipe)
-            const recipeCard = createRecipeCard(recipe)
-            gridWrapper.appendChild(recipeCard)
         }
     })
 
     filteredRecipes = filteredNewRecipes
-    populateDropdown(filteredRecipes)
-    updateSearchResultsCount(filteredRecipes.length)
 }
 
-const selectedIngredients = new Set()
-
 function filterRecipesByIngredients() {
-    const gridWrapper = document.querySelector('.grid-wrapper')
-    gridWrapper.innerHTML = ''
 
     const filteredNewRecipes = []
 
@@ -139,13 +123,10 @@ function filterRecipesByIngredients() {
         )
         if (hasIngredients) {
             filteredNewRecipes.push(recipe)
-            const recipeCard = createRecipeCard(recipe)
-            gridWrapper.appendChild(recipeCard)
         }
     })
 
     filteredRecipes = filteredNewRecipes
-    updateSearchResultsCount(filteredRecipes.length)
 }
 
 document.querySelector('.drop-btn').addEventListener('click', function () {
@@ -209,8 +190,7 @@ function populateDropdown(recipes) {
                 selectedIngredients.add(ingredient)
                 ingredientLink.classList.add('selected')
             }
-            filterRecipesByIngredients()
-            updateSelectedIngredientTags()
+            filterRecipesCombined()
         })
         dropdownContent.appendChild(ingredientLink)
     })
@@ -230,5 +210,26 @@ function populateDropdown(recipes) {
     })
 }
 
-populateDropdown(recipes)
-updateSelectedIngredientTags()
+function filterRecipesCombined() {
+    // Je dois appeler à la recherche par mot clés
+    filterRecipes()
+    // Je fais appel a la recherche par tags
+    filterRecipesByIngredients()
+    // Mettre à jour les tags d'ingrédients sélectionnés
+    updateSelectedIngredientTags()
+    // Le resultat doit etre afficher
+    displayRecipes(filteredRecipes)
+    // Mettre a jours le nombre de recette
+    updateSearchResultsCount(filteredRecipes.length)
+    // Mettre a jours le dropdown
+    populateDropdown(filteredRecipes)
+}
+
+function init() {
+    displayRecipes(recipes)
+    updateSearchResultsCount(recipes.length)
+    populateDropdown(recipes)
+    updateSelectedIngredientTags()
+}
+
+init()

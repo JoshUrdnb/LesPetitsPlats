@@ -255,7 +255,7 @@ main {
     border-radius: 0 0 1.25rem 1.25rem;
 }
 
-.card-desciption {
+.card-description {
     text-overflow: ellipsis;
     overflow: hidden;
     overflow-y: auto;
