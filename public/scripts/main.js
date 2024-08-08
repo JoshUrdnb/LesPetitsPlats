@@ -153,11 +153,8 @@ function updateSelectedIngredientTags() {
 
         removeButton.addEventListener('click', function () {
             selectedIngredients.delete(ingredient)
-            populateDropdown(recipes)
-            filteredRecipes = recipes
-            filterRecipes()
-            filterRecipesByIngredients()
-            updateSelectedIngredientTags()
+            // Je relancer la recherche combinée (texte + ingrédients)
+            filterRecipesCombined()
         })
 
         tag.appendChild(removeButton)
