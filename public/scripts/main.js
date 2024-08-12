@@ -1,67 +1,10 @@
 import { recipes } from "./data/recipes.js"
+import { createRecipeCard } from "./recipes-template.js"
 
 let filteredRecipes = recipes
 const searchField = document.getElementById('search-input')
 const selectedIngredients = new Set()
-
-function createRecipeCard(recipe) {
-    const card = document.createElement('div')
-    card.className = 'card'
-
-    const prepTime = document.createElement('span')
-    prepTime.className = 'prep-time'
-    prepTime.textContent = `${recipe.time}mn`
-    card.appendChild(prepTime)
-
-    const img = document.createElement('img')
-    img.src = `public/img/${recipe.image}`
-    img.alt = `Image de ${recipe.name}`
-    img.className = 'card-img'
-    card.appendChild(img)
-
-    const cardContent = document.createElement('div')
-    cardContent.className = 'card-content'
-
-    const title = document.createElement('h2')
-    title.textContent = recipe.name
-    cardContent.appendChild(title)
-
-    const recipeHeader = document.createElement('h3')
-    recipeHeader.textContent = 'RECETTE'
-    cardContent.appendChild(recipeHeader)
-
-    const description = document.createElement('p')
-    description.textContent = recipe.description
-    description.className = ('card-description')
-    cardContent.appendChild(description)
-
-    const ingredientsHeader = document.createElement('h3')
-    ingredientsHeader.textContent = 'INGRÉDIENTS'
-    cardContent.appendChild(ingredientsHeader)
-
-    const ingredientsWrapper = document.createElement('div')
-    ingredientsWrapper.className = 'ingredients-wrapper'
-
-    recipe.ingredients.forEach((ingredient) => {
-        const ingredientItem = document.createElement('div')
-        ingredientItem.className = 'ingredient-item'
-
-        const ingredientName = document.createElement('p')
-        ingredientName.textContent = ingredient.ingredient
-        ingredientItem.appendChild(ingredientName)
-
-        const ingredientQuantity = document.createElement('p')
-        ingredientQuantity.textContent = `${ingredient.quantity || ''} ${ingredient.unit || ''}`
-        ingredientItem.appendChild(ingredientQuantity)
-
-        ingredientsWrapper.appendChild(ingredientItem)
-    })
-
-    cardContent.appendChild(ingredientsWrapper)
-    card.appendChild(cardContent)
-
-    return card
-}
+// const selectedAppliances = new Set()
 
 function displayRecipes(recipes) {
     const gridWrapper = document.querySelector('.grid-wrapper')
@@ -129,10 +72,28 @@ function filterRecipesByIngredients() {
     filteredRecipes = filteredNewRecipes
 }
 
+// function filterRecipesByAppliances() {
+//     const filteredNewRecipes = []
+
+//     filteredRecipes.forEach(recipe => {
+//         if (selectedAppliances.has(recipe.appliance.toLowerCase())) {
+//             filteredNewRecipes.push(recipe)
+//         }
+//     })
+
+//     filteredRecipes = filteredNewRecipes
+// }
+
 document.querySelector('.drop-btn').addEventListener('click', function () {
     const dropdownContent = document.querySelector('.dropdown-content')
     dropdownContent.classList.toggle('show')
 })
+
+// Pour les appareils
+// document.querySelector('.drop-btn2').addEventListener('click', function () {
+//     const dropdownContent = document.querySelector('.appliance-dropdown-content')
+//     dropdownContent.classList.toggle('show')
+// })
 
 function updateSelectedIngredientTags() {
     const selectedIngredientsWrapper = document.querySelector('.selected-ingredients')
@@ -161,6 +122,34 @@ function updateSelectedIngredientTags() {
         selectedIngredientsWrapper.appendChild(tag)
     })
 }
+
+// function updateSelectedApplianceTags() {
+//     const selectedAppliancesWrapper = document.querySelector('.selected-appliances')
+//     selectedAppliancesWrapper.innerHTML = ''
+
+//     selectedAppliances.forEach(appliance => {
+//         const tag = document.createElement('div')
+//         tag.textContent = appliance
+//         tag.className = 'appliance-tag'
+
+//         const removeButton = document.createElement('a')
+//         removeButton.className = 'remove-tag'
+
+//         const icon = document.createElement('i')
+//         icon.className = 'fa-solid fa-xmark'
+//         icon.setAttribute('aria-hidden', 'true')
+//         removeButton.appendChild(icon)
+
+//         removeButton.addEventListener('click', function () {
+//             selectedAppliances.delete(appliance)
+//             // Relancer la recherche combinée (texte + ingrédients + appareils)
+//             filterRecipesCombined()
+//         })
+
+//         tag.appendChild(removeButton)
+//         selectedAppliancesWrapper.appendChild(tag)
+//     })
+// }
 
 function populateDropdown(recipes) {
     const dropdownContent = document.querySelector('.dropdown-content2')
@@ -207,25 +196,70 @@ function populateDropdown(recipes) {
     })
 }
 
+// function populateApplianceDropdown(recipes) {
+//     console.log("populateApplianceDropdown a été appelée")
+
+//     const dropdownContent = document.querySelector('.appliance-dropdown-content2')
+//     dropdownContent.innerHTML = ''
+
+//     const appliancesSet = new Set(
+//         recipes
+//             .map(recipe => recipe.appliance)
+//             .filter(appliance => appliance) // Filtre les valeurs nulles ou indéfinies
+//     )
+
+//     console.log("Ensemble des appareils extraits des recettes :", appliancesSet)
+
+//     appliancesSet.forEach(appliance => {
+//         console.log("Ajout de l'appareil :", appliance)
+
+//         const applianceLink = document.createElement('a')
+//         applianceLink.href = '#'
+//         applianceLink.textContent = appliance
+//         applianceLink.addEventListener('click', function (e) {
+//             e.preventDefault()
+//             const lowerCaseAppliance = appliance.toLowerCase()
+//             if (selectedAppliances.has(lowerCaseAppliance)) {
+//                 selectedAppliances.delete(lowerCaseAppliance)
+//                 applianceLink.classList.remove('selected')
+//                 console.log("Appareil supprimé :", appliance)
+//             } else {
+//                 selectedAppliances.add(lowerCaseAppliance)
+//                 applianceLink.classList.add('selected')
+//                 console.log("Appareil sélectionné :", appliance)
+//             }
+//             filterRecipesCombined()
+//         })
+//         dropdownContent.appendChild(applianceLink)
+//     })
+// }
+
 function filterRecipesCombined() {
     // Je dois appeler à la recherche par mot clés
     filterRecipes()
     // Je fais appel a la recherche par tags
     filterRecipesByIngredients()
+    // Filtrer par appareils
+    // filterRecipesByAppliances()
     // Mettre à jour les tags d'ingrédients sélectionnés
     updateSelectedIngredientTags()
+    // Mettre à jour les tags d'appareils sélectionnés
+    // updateSelectedApplianceTags()
     // Le resultat doit etre afficher
     displayRecipes(filteredRecipes)
     // Mettre a jours le nombre de recette
     updateSearchResultsCount(filteredRecipes.length)
-    // Mettre a jours le dropdown
+    // Mettre a jours le dropdown des ingredients
     populateDropdown(filteredRecipes)
+    // Mettre a jours le dropdown des appareils
+    // populateApplianceDropdown(filteredRecipes)
 }
 
 function init() {
     displayRecipes(recipes)
     updateSearchResultsCount(recipes.length)
     populateDropdown(recipes)
+    // populateApplianceDropdown(recipes)
     updateSelectedIngredientTags()
 }
 

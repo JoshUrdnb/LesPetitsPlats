@@ -111,7 +111,7 @@ main {
 
 .navbar {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-top: 3rem;
 }
 
@@ -121,7 +121,7 @@ main {
     display: inline-block;
 }
 
-.drop-btn {
+.drop-btn-style {
     display: flex;
     justify-content: center;
     justify-content: space-between;
@@ -137,7 +137,7 @@ main {
     width: 200px;
 }
 
-.dropdown-content {
+.drop-style {
     display: none;
     position: absolute;
     background-color: #FFF;
@@ -148,23 +148,23 @@ main {
     z-index: 1;
 }
 
-.dropdown-content a {
+.drop-style a {
     color: #1B1B1B;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {
+.drop-style a:hover {
     background-color: #ffd15a;
 }
 
-.dropdown-content a.selected {
+.drop-style a.selected {
     background-color: #ffd15a;
     /* color: #000; */
 }
 
-.dropdown-content::-webkit-scrollbar {
+.drop-style::-webkit-scrollbar {
     width: 0;
     background: transparent;
 }
@@ -175,9 +175,9 @@ main {
 
 /* TAGS */
 
-.selected-ingredients {
+.selected-style {
     display: flex;
-    height: 5rem;
+    /* height: 5rem; */
     width: 100%;
     margin-top: 2rem;
 }
@@ -196,6 +196,23 @@ main {
 }
 
 .ingredient-tag a{
+    cursor: pointer;
+}
+
+.appliance-tag {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-right: 1rem;
+    background-color: #ffd15a;
+    height: 3rem;
+    width: 200px;
+    border-radius: .5rem;
+}
+
+.appliance-tag a{
     cursor: pointer;
 }
 
