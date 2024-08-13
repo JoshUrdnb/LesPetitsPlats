@@ -174,6 +174,7 @@ function populateDropdown(recipes) {
     console.log("Ensemble des ingrédients extraits des recettes :", ingredientsSet)
 
     ingredientsSet.forEach(ingredient => {
+        console.log("Ajout de l'ingredient :", ingredient)
         const ingredientLink = document.createElement('a')
         ingredientLink.href = '#'
         ingredientLink.textContent = ingredient
@@ -213,11 +214,14 @@ function populateApplianceDropdown(recipes) {
     const dropdownContent = document.querySelector('.appliance-dropdown-content2')
     dropdownContent.innerHTML = ''
 
-    const appliancesSet = new Set(
-        recipes
-            .map(recipe => recipe.appliance)
-            .filter(appliance => appliance) // Filtre les valeurs nulles ou indéfinies
-    )
+    const appliancesSet = new Set()
+
+    recipes.forEach(recipe => {
+        const appliance = recipe.appliance
+        if (appliance) {
+            appliancesSet.add(appliance)
+        }
+    })
 
     console.log("Ensemble des appareils extraits des recettes :", appliancesSet)
 
