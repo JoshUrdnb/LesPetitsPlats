@@ -5,6 +5,7 @@ let filteredRecipes = recipes
 const searchField = document.getElementById('search-input')
 const selectedIngredients = new Set()
 const selectedAppliances = new Set()
+const selectedUstensils = new Set()
 
 function displayRecipes(recipes) {
     const gridWrapper = document.querySelector('.grid-wrapper')
@@ -91,6 +92,24 @@ function filterRecipesByAppliances() {
     filteredRecipes = filteredNewRecipes
 }
 
+// Filtre les recettes en fonction des ustensiles sélectionnés.
+function filterRecipesByUstensils() {
+
+    if (selectedUstensils.size === 0) {
+        return
+    }
+
+    const filteredNewRecipes = []
+
+    filteredRecipes.forEach(recipe => {
+        if (selectedUstensils.has(recipe.ustensils.toLowerCase())) {
+            filteredNewRecipes.push(recipe)
+        }
+    })
+
+    filteredRecipes = filteredNewRecipes
+}
+
 document.querySelector('.drop-btn').addEventListener('click', function () {
     const dropdownContent = document.querySelector('.dropdown-content')
     dropdownContent.classList.toggle('show')
@@ -99,6 +118,12 @@ document.querySelector('.drop-btn').addEventListener('click', function () {
 // Pour les appareils
 document.querySelector('.drop-btn2').addEventListener('click', function () {
     const dropdownContent = document.querySelector('.appliance-dropdown-content')
+    dropdownContent.classList.toggle('show')
+})
+
+// Pour les ustensiles
+document.querySelector('.drop-btn3').addEventListener('click', function () {
+    const dropdownContent = document.querySelector('.ustensils-dropdown-content')
     dropdownContent.classList.toggle('show')
 })
 
@@ -159,6 +184,35 @@ function updateSelectedApplianceTags() {
 
         tag.appendChild(removeButton)
         selectedAppliancesWrapper.appendChild(tag)
+    })
+}
+
+// Met à jour l'affichage des tags des ustensiles sélectionnés.
+function updateSelectedUstensilsTags() {
+    const selectedUstensilsWrapper = document.querySelector('.selected-ustensils')
+    selectedUstensilsWrapper.innerHTML = ''
+
+    selectedUstensils.forEach(ustensils => {
+        const tag = document.createElement('div')
+        tag.textContent = ustensils
+        tag.className = 'ustencils-tag'
+
+        const removeButton = document.createElement('a')
+        removeButton.className = 'remove-tag'
+
+        const icon = document.createElement('i')
+        icon.className = 'fa-solid fa-xmark'
+        icon.setAttribute('aria-hidden', 'true')
+        removeButton.appendChild(icon)
+
+        removeButton.addEventListener('click', function () {
+            selectedAppliances.delete(ustensils)
+            console.log("Appareil supprimé :", ustensils)
+            filterRecipesCombined()
+        })
+
+        tag.appendChild(removeButton)
+        selectedUstensilsWrapper.appendChild(tag)
     })
 }
 
@@ -257,7 +311,39 @@ function populateApplianceDropdown(recipes) {
     })
 }
 
-// Applique tous les filtres (texte, ingrédients, appareils) et met à jour l'affichage.
+// Remplit le dropdown avec les ustensiles extraits des recettes.
+function populateUstensilsDropdown(recipes) {
+    const dropdownContent = document.querySelector('.ustensils-dropdown-content2')
+    dropdownContent.innerHTML = ''
+
+    const ustensilsSet = new Set()
+
+    recipes.forEach(recipe => {
+        recipe.ustensils.forEach(ustensil => {
+            ustensilsSet.add(ustensil.toLowerCase()) // Ajouter chaque ustensile individuellement
+        })
+    })
+
+    ustensilsSet.forEach(ustensil => {
+        const ustensilLink = document.createElement('a')
+        ustensilLink.href = '#'
+        ustensilLink.textContent = ustensil
+        ustensilLink.addEventListener('click', function (e) {
+            e.preventDefault()
+            if (selectedUstensils.has(ustensil)) {
+                selectedUstensils.delete(ustensil)
+                ustensilLink.classList.remove('selected')
+            } else {
+                selectedUstensils.add(ustensil)
+                ustensilLink.classList.add('selected')
+            }
+            filterRecipesCombined()
+        })
+        dropdownContent.appendChild(ustensilLink)
+    })
+}
+
+// Applique tous les filtres (texte, ingrédients, appareils, ustensiles) et met à jour l'affichage.
 function filterRecipesCombined() {
     // Recherche par mot-clé
     filterRecipes()
@@ -268,10 +354,14 @@ function filterRecipesCombined() {
     // Filtrage par appareils
     filterRecipesByAppliances()
     console.log("filter Recipes By Appliances", filteredRecipes)
+    // Filtrage par ustensiles
+    filterRecipesByUstensils()
     // Mise à jour des tags d'ingrédients sélectionnés
     updateSelectedIngredientTags()
     // Mise à jour des tags d'appareils sélectionnés
     updateSelectedApplianceTags()
+    // Mise à jour des tags des ustensiles sélectionnés
+    updateSelectedUstensilsTags()
     // Affichage des recettes filtrées
     displayRecipes(filteredRecipes)
     // Mise à jour du nombre de recettes
@@ -288,8 +378,10 @@ function init() {
     updateSearchResultsCount(recipes.length)
     populateDropdown(recipes)
     populateApplianceDropdown(recipes)
+    populateUstensilsDropdown(recipes)
     updateSelectedIngredientTags()
     updateSelectedApplianceTags()
+    updateSelectedUstensilsTags()
 }
 
 init()
