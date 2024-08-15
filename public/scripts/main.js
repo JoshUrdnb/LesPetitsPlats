@@ -94,7 +94,6 @@ function filterRecipesByAppliances() {
 
 // Filtre les recettes en fonction des ustensiles sélectionnés.
 function filterRecipesByUstensils() {
-
     if (selectedUstensils.size === 0) {
         return
     }
@@ -102,13 +101,22 @@ function filterRecipesByUstensils() {
     const filteredNewRecipes = []
 
     filteredRecipes.forEach(recipe => {
-        if (selectedUstensils.has(recipe.ustensils.toLowerCase())) {
+        // Assurez-vous que recipe.ustensils est un tableau
+        const recipeUstensils = Array.isArray(recipe.ustensils) ? recipe.ustensils : []
+        
+        // Vérifiez si tous les ustensiles sélectionnés sont présents dans recipe.ustensils
+        const hasAllUstensils = [...selectedUstensils].every(selectedUstensil =>
+            recipeUstensils.map(ustensil => ustensil.toLowerCase()).includes(selectedUstensil.toLowerCase())
+        )
+        
+        if (hasAllUstensils) {
             filteredNewRecipes.push(recipe)
         }
     })
 
     filteredRecipes = filteredNewRecipes
 }
+
 
 document.querySelector('.drop-btn').addEventListener('click', function () {
     const dropdownContent = document.querySelector('.dropdown-content')
