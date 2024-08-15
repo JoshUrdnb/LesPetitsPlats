@@ -74,6 +74,11 @@ function filterRecipesByIngredients() {
 
 // Filtre les recettes en fonction des appareils sélectionnés.
 function filterRecipesByAppliances() {
+    console.log(selectedAppliances.size)
+    if (selectedAppliances.size === 0) {
+        return
+    }
+
     const filteredNewRecipes = []
     console.log("Filtrage des recettes par appareils")
 
@@ -167,7 +172,7 @@ function populateDropdown(recipes) {
     recipes.forEach(recipe => {
         recipe.ingredients.forEach(ingredient => {
             console.log("Ingrédient extrait :", ingredient.ingredient)
-            ingredientsSet.add(ingredient.ingredient);
+            ingredientsSet.add(ingredient.ingredient)
         })
     })
 
@@ -175,6 +180,9 @@ function populateDropdown(recipes) {
 
     ingredientsSet.forEach(ingredient => {
         console.log("Ajout de l'ingredient :", ingredient)
+        // Verrifier si l'ingredient fait partie des tag selecitonné, si 
+        // oui ajouter le background et la croix,
+        // sinon afficher normalement 
         const ingredientLink = document.createElement('a')
         ingredientLink.href = '#'
         ingredientLink.textContent = ingredient
@@ -253,10 +261,13 @@ function populateApplianceDropdown(recipes) {
 function filterRecipesCombined() {
     // Recherche par mot-clé
     filterRecipes()
+    console.log("Filtered Recipes",filteredRecipes)
     // Recherche par ingrédients
     filterRecipesByIngredients()
+    console.log("filteredRecipes by ingredient", filteredRecipes)
     // Filtrage par appareils
     filterRecipesByAppliances()
+    console.log("filter Recipes By Appliances", filteredRecipes)
     // Mise à jour des tags d'ingrédients sélectionnés
     updateSelectedIngredientTags()
     // Mise à jour des tags d'appareils sélectionnés
