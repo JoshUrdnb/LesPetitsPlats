@@ -214,9 +214,10 @@ function updateSelectedUstensilsTags() {
         removeButton.appendChild(icon)
 
         removeButton.addEventListener('click', function () {
-            selectedAppliances.delete(ustensils)
-            console.log("Appareil supprimé :", ustensils)
-            filterRecipesCombined()
+            selectedUstensils.has(ustensils) // Vérifier si l'ustensile est dans la liste avant de le supprimer
+                selectedUstensils.delete(ustensils)
+                // console.log("Appareil supprimé :", ustensils)
+                filterRecipesCombined()
         })
 
         tag.appendChild(removeButton)
