@@ -216,6 +216,22 @@ main {
     cursor: pointer;
 }
 
+.ustensils-tag {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-right: 1rem;
+    background-color: #ffd15a;
+    height: 3rem;
+    width: 200px;
+    border-radius: .5rem;
+}
+
+.ustensils-tag a{
+    cursor: pointer;
+}
 /* RECIPES */
 
 #all-recipes {

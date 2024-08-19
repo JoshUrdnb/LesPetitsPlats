@@ -108,7 +108,7 @@ function filterRecipesByUstensils() {
         const hasAllUstensils = [...selectedUstensils].every(selectedUstensil =>
             recipeUstensils.map(ustensil => ustensil.toLowerCase()).includes(selectedUstensil.toLowerCase())
         )
-        
+
         if (hasAllUstensils) {
             filteredNewRecipes.push(recipe)
         }
@@ -203,7 +203,7 @@ function updateSelectedUstensilsTags() {
     selectedUstensils.forEach(ustensils => {
         const tag = document.createElement('div')
         tag.textContent = ustensils
-        tag.className = 'ustencils-tag'
+        tag.className = 'ustensils-tag'
 
         const removeButton = document.createElement('a')
         removeButton.className = 'remove-tag'
