@@ -328,9 +328,11 @@ function populateUstensilsDropdown(recipes) {
     const ustensilsSet = new Set()
 
     recipes.forEach(recipe => {
-        recipe.ustensils.forEach(ustensil => {
-            ustensilsSet.add(ustensil.toLowerCase()) // Ajouter chaque ustensile individuellement
-        })
+        if (recipe.ustensils) {
+            recipe.ustensils.forEach(ustensil => {
+                ustensilsSet.add(ustensil.toLowerCase()) // Ajouter chaque ustensile individuellement
+            })
+        }
     })
 
     ustensilsSet.forEach(ustensil => {
@@ -351,6 +353,7 @@ function populateUstensilsDropdown(recipes) {
         dropdownContent.appendChild(ustensilLink)
     })
 }
+
 
 // Applique tous les filtres (texte, ingrédients, appareils, ustensiles) et met à jour l'affichage.
 function filterRecipesCombined() {
@@ -379,6 +382,8 @@ function filterRecipesCombined() {
     populateDropdown(filteredRecipes)
     // Mise à jour du dropdown des appareils
     populateApplianceDropdown(filteredRecipes)
+    // Mise à jour du dropdown des ustensils
+    populateUstensilsDropdown(filteredRecipes)
 }
 
 // Initialisation de l'application
