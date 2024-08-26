@@ -234,21 +234,23 @@ function populateDropdown(recipes) {
 
     recipes.forEach(recipe => {
         recipe.ingredients.forEach(ingredient => {
-            console.log("Ingrédient extrait :", ingredient.ingredient)
             ingredientsSet.add(ingredient.ingredient)
         })
     })
 
-    console.log("Ensemble des ingrédients extraits des recettes :", ingredientsSet)
-
     ingredientsSet.forEach(ingredient => {
-        console.log("Ajout de l'ingredient :", ingredient)
         // Verrifier si l'ingredient fait partie des tag selecitonné, si 
         // oui ajouter le background et la croix,
         // sinon afficher normalement 
         const ingredientLink = document.createElement('a')
         ingredientLink.href = '#'
         ingredientLink.textContent = ingredient
+        
+        // Vérifier si l'ingrédient est déjà sélectionné
+        if (selectedIngredients.has(ingredient)) {
+            ingredientLink.classList.add('selected')
+        }
+
         ingredientLink.addEventListener('click', function (e) {
             e.preventDefault()
             if (selectedIngredients.has(ingredient)) {
@@ -280,8 +282,6 @@ function populateDropdown(recipes) {
 
 // Remplit le dropdown avec les appareils extraits des recettes.
 function populateApplianceDropdown(recipes) {
-    console.log("populateApplianceDropdown a été appelée")
-
     const dropdownContent = document.querySelector('.appliance-dropdown-content2')
     dropdownContent.innerHTML = ''
 
@@ -294,25 +294,25 @@ function populateApplianceDropdown(recipes) {
         }
     })
 
-    console.log("Ensemble des appareils extraits des recettes :", appliancesSet)
-
     appliancesSet.forEach(appliance => {
-        console.log("Ajout de l'appareil :", appliance)
-
         const applianceLink = document.createElement('a')
         applianceLink.href = '#'
         applianceLink.textContent = appliance
+        
+        // Vérifier si l'appareil est déjà sélectionné
+        if (selectedAppliances.has(appliance.toLowerCase())) {
+            applianceLink.classList.add('selected')
+        }
+
         applianceLink.addEventListener('click', function (e) {
             e.preventDefault()
             const lowerCaseAppliance = appliance.toLowerCase()
             if (selectedAppliances.has(lowerCaseAppliance)) {
                 selectedAppliances.delete(lowerCaseAppliance)
                 applianceLink.classList.remove('selected')
-                console.log("Appareil supprimé :", appliance)
             } else {
                 selectedAppliances.add(lowerCaseAppliance)
                 applianceLink.classList.add('selected')
-                console.log("Appareil sélectionné :", appliance)
             }
             filterRecipesCombined()
         })
@@ -339,6 +339,12 @@ function populateUstensilsDropdown(recipes) {
         const ustensilLink = document.createElement('a')
         ustensilLink.href = '#'
         ustensilLink.textContent = ustensil
+
+        // Vérifier si l'ustensile est déjà sélectionné
+        if (selectedUstensils.has(ustensil)) {
+            ustensilLink.classList.add('selected')
+        }
+
         ustensilLink.addEventListener('click', function (e) {
             e.preventDefault()
             if (selectedUstensils.has(ustensil)) {
@@ -353,7 +359,6 @@ function populateUstensilsDropdown(recipes) {
         dropdownContent.appendChild(ustensilLink)
     })
 }
-
 
 // Applique tous les filtres (texte, ingrédients, appareils, ustensiles) et met à jour l'affichage.
 function filterRecipesCombined() {

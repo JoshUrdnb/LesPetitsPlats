@@ -159,10 +159,10 @@ main {
     background-color: #ffd15a;
 }
 
-.drop-style a.selected {
+/* .drop-style a.selected {
     background-color: #ffd15a;
-    /* color: #000; */
-}
+    color: #000;
+} */
 
 .drop-style::-webkit-scrollbar {
     width: 0;
@@ -172,6 +172,24 @@ main {
 .show {
     display: block;
     width: 100%;
+}
+
+/* TAGS IN DROPDOWN */
+
+.selected {
+    background-color: #FFD15B;
+    position: relative;
+}
+
+.selected::after {
+    content: 'x';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-weight: bold;
+    font-size: larger;
+    color: #fff;
 }
 
 /* TAGS */
