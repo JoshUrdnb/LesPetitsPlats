@@ -111,8 +111,12 @@ main {
 
 .navbar {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     margin-top: 3rem;
+}
+
+.drop-wrap {
+    display: flex;
 }
 
 .dropdown-wrapper {
@@ -136,6 +140,10 @@ main {
     border-radius: .5rem;
     width: 200px;
 }
+
+/* .dropdown-content {
+    position: absolute;
+} */
 
 .drop-style {
     display: none;
@@ -183,7 +191,7 @@ main {
 
 .selected::after {
     font-family: 'Font Awesome 6 Free';
-    content: '\f057'; /* Code Unicode pour l'icône fa-circle-xmark */
+    content: '\f057';
     font-weight: 900;
     position: absolute;
     top: 50%;
@@ -342,4 +350,14 @@ main {
 .ingredients-wrapper .ingredient-item p:nth-child(2) {
     font-weight: lighter;
     color: #7A7A7A;
+}
+
+/*** ANIMATION DROPDOWN ***/
+.mark{
+    transition: transform 0.3s;
+    transform: rotate(180deg);
+}
+
+.rotated{
+    transform: rotate(0deg);
 }
