@@ -117,7 +117,6 @@ function filterRecipesByUstensils() {
     filteredRecipes = filteredNewRecipes
 }
 
-
 document.querySelector('.drop-btn').addEventListener('click', function () {
     const dropdownContent = document.querySelector('.dropdown-content')
     dropdownContent.classList.toggle('show')

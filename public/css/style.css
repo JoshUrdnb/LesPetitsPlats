@@ -182,14 +182,16 @@ main {
 }
 
 .selected::after {
-    content: 'x';
+    font-family: 'Font Awesome 6 Free';
+    content: '\f057'; /* Code Unicode pour l'icône fa-circle-xmark */
+    font-weight: 900;
     position: absolute;
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
     font-weight: bold;
     font-size: larger;
-    color: #fff;
+    color: #333;
 }
 
 /* TAGS */
