@@ -1,5 +1,5 @@
 import { recipes } from "./data/recipes.js"
-import { createRecipeCard } from "./recipes-template.js"
+import { createRecipeCard } from "./template.js"
 import { toggleRotate } from "./utilities.js"
 
 window.toggleRotate = toggleRotate
