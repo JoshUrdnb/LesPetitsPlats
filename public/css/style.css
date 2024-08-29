@@ -387,10 +387,14 @@ main {
 
 /* Mobiles en mode portrait */
 @media (min-width: 320px) and (max-width: 425px) {
+    .header-logo {
+        margin: 0.5rem 0 0 0.5rem;
+        height: 20px;
+    }
+    
     .header-background {
-        background-image: url(../../assets/homepage-background.jpg);
-        background-size: cover;
         background-position: center 100%;
+        height: 400px;
         width: 100%;
     }
     
@@ -400,12 +404,17 @@ main {
     }
 
     .main-title {
-        margin-top: 16rem;
-        font-size: 36px;
+        margin-top: 8rem;
+        font-size: 16px;
     }
 
     .searchbar {
-        width: 50%;
+        width: 100%;
+    }
+
+    main {
+        width: 320px;
+        margin: auto;
     }
 
     .navbar {
@@ -413,7 +422,6 @@ main {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        /* text-align: center; */
     }
 
     .dropdown-wrapper {
@@ -423,17 +431,141 @@ main {
         align-items: center;
     }
 
-    .grid-wrapper {
-        grid-template-columns: repeat(1, 1fr);
-        /* grid-template-columns: repeat(1, minmax(220px, 1fr)); */
-        grid-template-rows: auto;
-        gap: 4rem;
-        margin: 0 5rem 0 5rem;
+    .drop-btn-style {
+        margin: auto;
     }
 
-    .card {
-        /* height: 100%; */
-        width: 300px;
-        margin-bottom: 4rem;
+    .flex-wrapper {
+        margin: 1rem 0 0 0;
+    }
+
+    .grid-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+        gap: 1.25rem;
+        margin: 0 1rem 0 1rem;
+    }
+
+    .card-content {
+        padding: 1rem;
+    }
+
+    .card-description {
+        height: 3rem;
+    }
+}
+
+/* Tablettes en mode portrait (Mobiles landscape) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .header-logo {
+        margin: 0.5rem 0 0 0.5rem;
+        height: 20px;
+    }
+    
+    .header-background {
+        background-position: center 100%;
+        height: 400px;
+        width: 100%;
+    }
+    
+    .header-container {
+        /* height: 480px; */
+        width: 100%;
+    }
+
+    .main-title {
+        margin-top: 8rem;
+        font-size: 16px;
+    }
+
+    .searchbar {
+        width: 100%;
+    }
+
+    main {
+        width: 768px;
+        margin: auto;
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .drop-btn-style {
+        margin-right: 1rem;
+    }
+
+    .grid-wrapper {
+        grid-template-columns: repeat(2, 320px);
+        grid-template-rows: auto;
+        gap: 4rem;
+    }
+
+    .card-content {
+        padding: 1rem;
+    }
+
+    .card-description {
+        height: 3rem;
+    }
+}
+
+/* Small laptop en mode portrait (Tablettes landscape) */
+@media (min-width: 1024px) and (max-width: 1024px) {
+    .header-logo {
+        margin: 0.5rem 0 0 0.5rem;
+        height: 20px;
+    }
+    
+    .header-background {
+        background-position: center 100%;
+        height: 400px;
+        width: 100%;
+    }
+    
+    .header-container {
+        width: 100%;
+    }
+
+    .main-title {
+        margin-top: 8rem;
+        font-size: 16px;
+    }
+
+    .searchbar {
+        width: 100%;
+    }
+
+    main {
+        width: 1000px;
+        margin: auto;
+    }
+
+    /* .navbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    } */
+
+    .drop-btn-style {
+        margin-right: 1rem;
+    }
+
+    .grid-wrapper {
+        grid-template-columns: repeat(3, 280px);
+        grid-template-rows: auto;
+        gap: 4rem;
+    }
+
+    .card-content {
+        padding: 1rem;
+    }
+
+    .card-description {
+        height: 3rem;
     }
 }
