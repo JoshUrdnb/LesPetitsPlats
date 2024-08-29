@@ -115,11 +115,11 @@ main {
     margin-top: 3rem;
 }
 
-.drop-wrap {
+.dropdown-wrapper {
     display: flex;
 }
 
-.dropdown-wrapper {
+.dropdown-menu {
     /* display: flex; */
     position: relative;
     display: inline-block;
@@ -381,4 +381,59 @@ main {
 .ingredients-wrapper .ingredient-item p:nth-child(2) {
     font-weight: lighter;
     color: #7A7A7A;
+}
+
+/*** RESPONSIVE DESIGN ***/
+
+/* Mobiles en mode portrait */
+@media (min-width: 320px) and (max-width: 425px) {
+    .header-background {
+        background-image: url(../../assets/homepage-background.jpg);
+        background-size: cover;
+        background-position: center 100%;
+        width: 100%;
+    }
+    
+    .header-container {
+        /* height: 480px; */
+        width: 100%;
+    }
+
+    .main-title {
+        margin-top: 16rem;
+        font-size: 36px;
+    }
+
+    .searchbar {
+        width: 50%;
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* text-align: center; */
+    }
+
+    .dropdown-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .grid-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+        /* grid-template-columns: repeat(1, minmax(220px, 1fr)); */
+        grid-template-rows: auto;
+        gap: 4rem;
+        margin: 0 5rem 0 5rem;
+    }
+
+    .card {
+        /* height: 100%; */
+        width: 300px;
+        margin-bottom: 4rem;
+    }
 }
