@@ -36,21 +36,23 @@
         <div class="navbar">
 
             <div class="dropdown-wrapper">
-
-                <div class="dropdown-menu">
-                    <div class="drop-btn drop-btn-style" onclick="toggleRotate(event)">
-                        <p>Ingrédients</p><span class="mark"><i
-                                class="fa-solid fa-chevron-right fa-rotate-90"></i></span>
+                <div class="wrapper-menu">
+                    <div class="dropdown-menu">
+                        <div class="drop-btn drop-btn-style" onclick="toggleRotate(event)">
+                            <p>Ingrédients</p><span class="mark"><i
+                                    class="fa-solid fa-chevron-right fa-rotate-90"></i></span>
+                        </div>
                     </div>
-                </div>
-                <div class="dropdown-content drop-style">
-                    <div class="dropdown-search">
-                        <input type="text" id="ingredient-search" placeholder=" | ">
+                    <div class="dropdown-content drop-style">
+                        <div class="dropdown-search">
+                            <input type="text" id="ingredient-search" placeholder=" | ">
+                        </div>
+                        <div class="dropdown-content2"></div>
                     </div>
-                    <div class="dropdown-content2"></div>
+                    <div class="selected-ingredients selected-style"></div>
                 </div>
-                <div class="selected-ingredients selected-style"></div>
 
+                <div class="wrapper-menu">
                 <div class="dropdown-menu">
                     <div class="drop-btn2 drop-btn-style" onclick="toggleRotate(event)">
                         <p>Appareils</p><span class="mark"><i class="fa-solid fa-chevron-right fa-rotate-90"></i></span>
@@ -60,21 +62,23 @@
                     <div class="appliance-dropdown-content2"></div>
                 </div>
                 <div class="selected-appliances selected-style"></div>
-
-                <div class="dropdown-menu">
-                    <div class="drop-btn3 drop-btn-style" onclick="toggleRotate(event)">
-                        <p>Ustensiles</p><span class="mark"><i
-                                class="fa-solid fa-chevron-right fa-rotate-90"></i></span>
-                    </div>
-                </div>
-                <div class="ustensils-dropdown-content drop-style">
-                    <div class="ustensils-dropdown-content2"></div>
-                </div>
-                <div class="selected-ustensils selected-style"></div>
-
             </div>
 
-            <div id="all-recipes"></div>
+            <div class="wrapper-menu">
+            <div class="dropdown-menu">
+                <div class="drop-btn3 drop-btn-style" onclick="toggleRotate(event)">
+                    <p>Ustensiles</p><span class="mark"><i class="fa-solid fa-chevron-right fa-rotate-90"></i></span>
+                </div>
+            </div>
+            <div class="ustensils-dropdown-content drop-style">
+                <div class="ustensils-dropdown-content2"></div>
+            </div>
+            <div class="selected-ustensils selected-style"></div>
+        </div>
+
+        </div>
+
+        <div id="all-recipes"></div>
         </div>
         <div class="flex-wrapper">
             <div class="grid-wrapper">
