@@ -399,7 +399,6 @@ main {
     }
     
     .header-container {
-        /* height: 480px; */
         width: 100%;
     }
 
@@ -453,6 +452,10 @@ main {
     .card-description {
         height: 3rem;
     }
+
+    .search-btn {
+        display: none;
+    }
 }
 
 /* Tablettes en mode portrait (Mobiles landscape) */
@@ -469,7 +472,6 @@ main {
     }
     
     .header-container {
-        /* height: 480px; */
         width: 100%;
     }
 
@@ -479,7 +481,7 @@ main {
     }
 
     .searchbar {
-        width: 100%;
+        width: 500px;
     }
 
     main {
@@ -511,6 +513,10 @@ main {
     .card-description {
         height: 3rem;
     }
+
+    .search-btn {
+        display: none;
+    }
 }
 
 /* Small laptop en mode portrait (Tablettes landscape) */
@@ -532,24 +538,13 @@ main {
 
     .main-title {
         margin-top: 8rem;
-        font-size: 16px;
-    }
-
-    .searchbar {
-        width: 100%;
+        font-size: 26px;
     }
 
     main {
         width: 1000px;
         margin: auto;
     }
-
-    /* .navbar {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    } */
 
     .drop-btn-style {
         margin-right: 1rem;
