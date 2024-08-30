@@ -40,9 +40,7 @@ function filterRecipes() {
 
     const lowerCaseSearchText = searchText.toLowerCase()
 
-    const filteredNewRecipes = []
-
-    recipes.forEach(recipe => {
+    filteredRecipes = recipes.filter(recipe => {
         const recipeName = recipe.name ? recipe.name.toLowerCase() : ''
         const recipeDescription = recipe.description ? recipe.description.toLowerCase() : ''
         const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient ? ing.ingredient.toLowerCase() : '').join('')
@@ -51,12 +49,8 @@ function filterRecipes() {
         const combinedText = `${recipeName} ${recipeDescription} ${recipeIngredients}`
 
         // Vérifier si le texte de recherche est présent dans la chaîne combinée
-        if (combinedText.includes(lowerCaseSearchText)) {
-            filteredNewRecipes.push(recipe)
-        }
+        return combinedText.includes(lowerCaseSearchText)
     })
-
-    filteredRecipes = filteredNewRecipes
 }
 
 // Filtre les recettes en fonction des ingrédients sélectionnés.
