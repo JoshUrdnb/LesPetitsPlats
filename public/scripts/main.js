@@ -42,14 +42,23 @@ function filterRecipes() {
 
     filteredRecipes = recipes.filter(recipe => {
         const recipeName = recipe.name ? recipe.name.toLowerCase() : ''
+        if (recipeName.includes(lowerCaseSearchText)) {
+            return true
+        }
+
         const recipeDescription = recipe.description ? recipe.description.toLowerCase() : ''
-        const recipeIngredients = recipe.ingredients.map(ing => ing.ingredient ? ing.ingredient.toLowerCase() : '').join('')
+        if (recipeDescription.includes(lowerCaseSearchText)) {
+            return true
+        }
 
-        // Combiner tous les éléments en une seule chaîne de texte
-        const combinedText = `${recipeName} ${recipeDescription} ${recipeIngredients}`
+        const recipeIngredients = recipe.ingredients.find(ing => 
+            ing.ingredient && ing.ingredient.toLowerCase().includes(lowerCaseSearchText)
+        )
+        if (recipeIngredients) {
+            return true
+        }
 
-        // Vérifier si le texte de recherche est présent dans la chaîne combinée
-        return combinedText.includes(lowerCaseSearchText)
+        return false
     })
 }
 
