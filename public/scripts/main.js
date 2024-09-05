@@ -322,6 +322,20 @@ function populateApplianceDropdown(recipes) {
         })
         dropdownContent.appendChild(applianceLink)
     })
+
+    const applianceSearchInput = document.getElementById('appliance-search')
+    applianceSearchInput.addEventListener('input', function (e) {
+        const searchValue = e.target.value.trim().toLowerCase()
+
+        dropdownContent.querySelectorAll('a').forEach(link => {
+            const applianceName = link.textContent.toLowerCase()
+            if (applianceName.includes(searchValue)) {
+                link.style.display = 'block'
+            } else {
+                link.style.display = 'none'
+            }
+        })
+    })
 }
 
 // Remplit le dropdown avec les ustensiles extraits des recettes.
@@ -361,6 +375,20 @@ function populateUstensilsDropdown(recipes) {
             filterRecipesCombined()
         })
         dropdownContent.appendChild(ustensilLink)
+    })
+
+    const ustensilSearchInput = document.getElementById('ustensil-search')
+    ustensilSearchInput.addEventListener('input', function (e) {
+        const searchValue = e.target.value.trim().toLowerCase()
+
+        dropdownContent.querySelectorAll('a').forEach(link => {
+            const ustensilName = link.textContent.toLowerCase()
+            if (ustensilName.includes(searchValue)) {
+                link.style.display = 'block'
+            } else {
+                link.style.display = 'none'
+            }
+        })
     })
 }
 

@@ -177,6 +177,18 @@ main {
     background: transparent;
 }
 
+.dropdown-search {
+    margin: 1rem;
+}
+
+.input-style {
+    border: #C6C6C6 solid 1px;
+    border-radius: .250rem;
+    height: 31.5px;
+    width: 100%;
+    padding-left: .5rem;
+}
+
 .show {
     display: block;
     width: 100%;
