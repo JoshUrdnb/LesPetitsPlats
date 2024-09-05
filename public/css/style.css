@@ -594,7 +594,7 @@ main {
 }
 
 /* Small laptop en mode portrait (Tablettes landscape) */
-@media (min-width: 1024px) and (max-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1439px) {
     .header-logo {
         margin: 0.5rem 0 0 0.5rem;
         height: 20px;
@@ -626,7 +626,7 @@ main {
 
     .grid-wrapper {
         grid-template-columns: repeat(3, 280px);
-        grid-template-rows: auto;
+        /* grid-template-rows: auto; */
         gap: 4rem;
     }
 
