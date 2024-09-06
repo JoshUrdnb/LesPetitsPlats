@@ -18,20 +18,35 @@
 <body>
     <header class="header-background">
         <div class="header-container">
-            <a href="index.html"><img class="header-logo" src="assets/Logo.png" alt="logo du site Les Petits Plats"></a>
+            <a href="index.html">
+                <img class="header-logo" src="assets/Logo.png" alt="logo du site Les Petits Plats">
+            </a>
             <div class="header-content">
-                <h1 class="main-title">CHERCHEZ PARMI PLUS DE 1500 RECETTES<br>
-                    DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</h1>
+                <h1 class="main-title">CHERCHEZ PARMI PLUS DE 1500 RECETTES<br> DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</h1>
                 <div class="search-container">
                     <div class="searchbar">
                         <input id="search-input" class="search-input" type="text" name="search"
                             placeholder="Rechercher une recette, un ingrédient, ...">
-                        <a class="search-btn" href="#"><img src="assets/Property_1=Default.png" alt=""></a>
+                        <a class="search-btn" href="#">
+                            <!-- Premier SVG -->
+                            <svg class="search-icon search-icon-default" width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="51" height="52" rx="10" fill="#1B1B1B"/>
+                                <circle cx="22" cy="22" r="9.5" stroke="white"/>
+                                <line x1="30.3536" y1="30.6464" x2="39.3536" y2="39.6464" stroke="white"/>
+                            </svg>
+                            <!-- Deuxième SVG -->
+                            <svg class="search-icon search-icon-hover" width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="51" height="52" rx="10" fill="#FFD15B"/>
+                                <circle cx="22" cy="22" r="9.5" stroke="black"/>
+                                <line x1="30.3536" y1="30.6464" x2="39.3536" y2="39.6464" stroke="black"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    
     <main class="main-container">
         <div class="navbar">
 
