@@ -141,9 +141,6 @@ main {
     width: 200px;
 }
 
-/* .dropdown-content {
-    position: absolute;
-} */
 
 .drop-style {
     display: none;
@@ -245,8 +242,9 @@ main {
 
 .selected-style {
     display: flex;
-    /* height: 5rem; */
+    flex-wrap: wrap;
     width: 100%;
+    max-width: 205px;
     margin-top: 2rem;
 }
 
@@ -256,11 +254,11 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    margin-right: 1rem;
     background-color: #ffd15a;
     height: 3rem;
     width: 200px;
     border-radius: .5rem;
+    margin-bottom: 1rem;
 }
 
 .ingredient-tag a{
@@ -273,11 +271,11 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    margin-right: 1rem;
     background-color: #ffd15a;
     height: 3rem;
     width: 200px;
     border-radius: .5rem;
+    margin-bottom: 1rem;
 }
 
 .appliance-tag a{
@@ -290,11 +288,11 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    margin-right: 1rem;
     background-color: #ffd15a;
     height: 3rem;
     width: 200px;
     border-radius: .5rem;
+    margin-bottom: 1rem;
 }
 
 .ustensils-tag a{
@@ -316,7 +314,6 @@ main {
 }
 
 .grid-wrapper {
-    /* padding: 5rem; */
     display: grid;
     grid-template-columns: repeat(3, 380px);
     grid-template-rows: repeat(4, 731px);
