@@ -97,6 +97,7 @@ button {
     align-items: center;
     position: relative;
     margin-right: 1rem;
+    cursor: pointer;
 }
 
 .search-icon-hover {
